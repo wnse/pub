@@ -82,7 +82,6 @@ def cal_q20(f, threads=1, max_seq_per_t=1000000):
             gc += gc_tmp
             total_base += total_base_tmp
             total_reads += total_reads_tmp
-
     return total_reads, total_base, q20/total_base, q30/total_base, gc/total_base
 
 def cal_avg_len(f):
@@ -189,6 +188,7 @@ def get_file_name(file_list):
     return name_list
 
 def Fastq_QC(fq_list, outdir, threads):
+    logging.info('fastqc_pub')
     mkdir(outdir)
     out_file_list = {}
     out_file_list['json'] = {}

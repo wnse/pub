@@ -3,15 +3,17 @@ import zipfile
 import magic
 import gzip
 from mkdir import mkdir
+import logging
 
 def file_type(f):
     file_type = magic.from_file(f, mime=True)
+    # logging.info(file_type)
     suffix = os.path.splitext(f)[1]
     if file_type == 'text/plain' and suffix in ['.fastq', '.fq']:
         return 'FQ'
     if file_type == 'text/plain' and suffix in ['.fasta', '.fa', 'fna']:
         return 'FA'
-    if file_type == 'application/x-gzip' and suffix in ['.gzip', '.gz', '.zip']:
+    if ((file_type == 'application/x-gzip') or (file_type == 'application/gzip')) and suffix in ['.gzip', '.gz', '.zip']:
         return 'gz'
     return False
 
